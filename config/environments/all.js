@@ -3,7 +3,7 @@
 var express = require('express'),
   poweredBy = require('connect-powered-by'),
   passport = require('passport'),
-  mongoStore = require('connect-mongo')(express),
+ // mongoStore = require('connect-mongo')(express),
   util = require('util');
 
 
@@ -13,7 +13,7 @@ var session = require('express-session');
 var busboy = require('connect-busboy');
  var logger = require('morgan');
 var favicon = require('serve-favicon');
-var errorHandler = require('errorhandler');
+//var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 
 
@@ -57,9 +57,9 @@ module.exports = function() {
   //this.engine('jade', require('jade').__express);
 
   this.datastore(require('locomotive-mongoose'));
-  this.sessionStore = new mongoStore({
-    url: config.mongodb.uri
-  });
+  // this.sessionStore = new mongoStore({
+  //   url: config.mongodb.uri
+  // });
 
   // Override default template extension.  By default, Locomotive finds
   // templates using the `name.format.engine` convention, for example
@@ -81,7 +81,7 @@ module.exports = function() {
   // middleware is built-in, with additional [third-party](https://github.com/senchalabs/connect/wiki)
   // middleware available as separate modules.
   this.use(poweredBy('Locomotive'));
-  this.use(express.logger());
+  //this.use(express.logger());
   this.use(favicon(__dirname + '/../../public/favicon.ico'));
 
  // this.use(express.favicon(__dirname + '/../../public/favicon.ico'));
@@ -174,11 +174,11 @@ module.exports = function() {
   }
 
 
-  this.use(this.router);
+ // this.use(this.router);
 
 
   if ('development' === this.env) {
     this.use(logger('dev'));
-    this.use(errorHandler());
+   // this.use(errorHandler());
   }
 };

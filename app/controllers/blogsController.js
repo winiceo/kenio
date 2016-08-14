@@ -1,6 +1,6 @@
 var Blog = require('../models/blog');
  
-var Controller = require('locomotive').Controller;
+var Controller = require('../../kevio/kevio').Controller;
 var blogsController = new Controller();
 
 var isAuthenticated = require('../utilities/auth').isAuthenticated;

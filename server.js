@@ -15,12 +15,14 @@
 
 
 
-var locomotive = require('./locomotive');
+var locomotive = require('./kenio/index');
 var bootable = require('bootable');
 
 // Create a new application and initialize it with *required* support for
 // controllers and views.  Move (or remove) these lines at your own peril.
-var app = new locomotive.Application();
+var app = new locomotive.Application({
+    test:true
+});
 app.phase(locomotive.boot.controllers(__dirname + '/app/controllers'));
 app.phase(locomotive.boot.views());
 

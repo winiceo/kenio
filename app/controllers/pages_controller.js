@@ -1,6 +1,6 @@
 'use strict';
 
-var locomotive = require('locomotive'),
+var locomotive = require('../../kevio/kevio'),
 	Controller = locomotive.Controller;
 
 var PagesController = new Controller();

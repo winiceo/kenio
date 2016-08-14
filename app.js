@@ -1,45 +1,29 @@
-// var locomotive = require('./locomotive'),
-//                  env = process.env.NODE_ENV || 'development',
-//                  port =  process.argv[2] || process.env.PORT || 3000,
-//                  address = '0.0.0.0';
-//
-// console.log(process.argv);
-//
-// locomotive.boot(__dirname, env, function(err, server) {
-//     if (err) { throw err; }
-//         server.listen(port, address, function() {
-//         var addr = this.address();
-//         console.log('listening on %s:%d', addr.address, addr.port);
-//     });
-// });
+'use strict';
+
+var express = require('express');
+var kraken = require('./genv');
 
 
+var options, app;
 
-var locomotive = require('./locomotive');
-var bootable = require('bootable');
-
-// Create a new application and initialize it with *required* support for
-// controllers and views.  Move (or remove) these lines at your own peril.
-var app = new locomotive.Application();
-app.phase(locomotive.boot.controllers(__dirname + '/app/controllers'));
-app.phase(locomotive.boot.views());
-
-// Add phases to configure environments, run initializers, draw routes, and
-// start an HTTP server.  Additional phases can be inserted as needed, which
-// is particularly useful if your application handles upgrades from HTTP to
-// other protocols such as WebSocket.
-app.phase(require('bootable-environment')(__dirname + '/config/environments'));
-app.phase(bootable.initializers(__dirname + '/config/initializers'));
-app.phase(locomotive.boot.routes(__dirname + '/config/routes'));
-app.phase(locomotive.boot.httpServer(3002, '0.0.0.0'));
-
-// Boot the application.  The phases registered above will be executed
-// sequentially, resulting in a fully initialized server that is listening
-// for requests.
-app.boot(function(err) {
-    if (err) {
-        console.error(err.message);
-        console.error(err.stack);
-        return process.exit(-1);
+/*
+ * Create and configure application. Also exports application instance for use by tests.
+ * See https://github.com/krakenjs/kraken-js#options for additional configuration options.
+ */
+options = {
+    onconfig: function (config, next) {
+        /*
+         * Add any additional config setup or overrides here. `config` is an initialized
+         * `confit` (https://github.com/krakenjs/confit/) configuration object.
+         */
+        next(null, config);
     }
+};
+
+app = module.exports = express();
+app.use(kraken(options));
+app.set("ok","ok");
+app.on('start', function () {
+    console.log('Application ready to serve requests.');
+    console.log('Environment: %s', app.kraken.get('env:env'));
 });

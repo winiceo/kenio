@@ -1,0 +1,27 @@
+// install apt packages
+fly apt#setup:<target>
+
+// app setup
+fly nvm#setup:<target> // install node.js
+fly app#setup:<target> // clone app repo and install npm packages
+
+// app deploy
+fly app#deploy:<target> // pull app repo
+
+// redis, mongodb setup
+fly redis#setup:<target> // install redis (redis.conf içine şifreyi gir)
+fly mongodb#setup:<target> // install mongodb
+fly mongodb#start:<target> // start mongodb service
+fly mongodb#stop:<target> // stop mongodb service
+fly mongodb#restart:<target> // restart mongodb service
+
+// upstart files
+fly upstart#redis:<target> // generate redis upstart conf file
+fly upstart#app:<target> // generate upstart conf files
+fly upstart#load:<target> // load upstart files to remote server
+
+// service actions
+fly start:<target> // start upstart service
+fly stop:<target> // stop upstart service
+fly restart:<target> // restart upstart service
+

@@ -33,7 +33,7 @@ module.exports = {
 		},
 		session: {
 			name: 'myapp.sid',
-			secret: 'qTM57WvPYT8Ljl5rmEhhWR5CKV5EyiGB',
+			secret: 'iuD45ZHvhBfh83ycP1xuUj1fKBKnJqgq',
 			cookie: {
 				maxAge: 604800000
 			},
@@ -75,7 +75,7 @@ module.exports = {
 			lean: true
 		},
 		token: {
-			secret: 'PkF1ix0uY3mlZDUaQaeDzGztJWenxlSO',
+			secret: 'Yz8fu2R6FueEigfGs3RJ0qTH7IpJ5kGY',
 			expires: 60
 		},
 		admin: {
@@ -92,25 +92,49 @@ module.exports = {
 		list: [
 			{name: 'System', slug: 'system', long: 'System'},
 			{name: 'My App', slug: 'myapp', long: 'My App Description'},
-			{name: 'genv', slug: 'genv', long: 'kenio'}
+			{name: 'genv maker', slug: 'genv', long: 'maker online'}
 		]
 	},
 
 	auth: {
 		'myapp': {
+			'/api/login': false,
+			'/api/token': false,
+			'/api/forgot': false,
+			'/api/invite': false,
+			'/api/invite/:token': false,
+			'/api/register': false,
+			'/api/resend': false,
+			'/api/change_password': false,
+			'/api/social': false,
+			'/api/waiting/accept': false,
+			'/api/waiting/decline': false,
+			'/api/waiting/line': false,
+
+			register: {
+				username: 'required|min:2|max:20|alpha_num',
+				password: 'required|min:4|max:20',
+				no_email_verify: true
+			},
+			auth: {
+				invite_moderation: false,
+				invite_expires: 7,
+				waiting_list: false
+			}
+		},
+		'genv': {
 			'/api/login': true,
 			'/api/token': true,
-			'/api/forgot': true,
-			'/api/invite': true,
-			'/api/invite/:token': true,
+			'/api/forgot': false,
+			'/api/invite': false,
+			'/api/invite/:token': false,
 			'/api/register': true,
-			'/api/resend': true,
-			'/api/change_password': true,
-			'/api/social': true,
-			'/api/waiting/accept': true,
-			'/api/waiting/decline': true,
-			'/api/waiting/line': true,
-
+			'/api/resend': false,
+			'/api/change_password': false,
+			'/api/social': false,
+			'/api/waiting/accept': false,
+			'/api/waiting/decline': false,
+			'/api/waiting/line': false,
 
 			register: {
 				username: 'required|min:2|max:20|alpha_num',
@@ -130,17 +154,17 @@ module.exports = {
 			enabled: false,
 			uri: 'mysql url'
 		},
-		// elasticsearch: {
-		// 	enabled: false,
-		// 	host: 'localhost',
-		// 	port: 9200,
-		// 	// auth: 'admin:admin'
-		// 	log: 'debug'
-		// },
+		elasticsearch: {
+			enabled: false,
+			host: 'localhost',
+			port: 9200,
+			// auth: 'admin:admin'
+			log: 'debug'
+		},
 		mongo: {
 			host: '127.0.0.1',
 			port: 27017,
-			db: 'kenio',
+			db: 'kevio',
 			// user: 'myapp',
 			// pass: 'myapp',
 			pool: 10,
@@ -148,7 +172,6 @@ module.exports = {
 			debug: true
 		},
 		redis: {
-			enabled:false,
 			host: '127.0.0.1',
 			port: 6379
 
@@ -174,6 +197,20 @@ module.exports = {
 	},
 
 	logger: {
+		transport: 'File',
+		options: {
+			level: 'info',
+			filename: '/deploy/genv/logs/all-logs.log',
+			handleExceptions: true,
+			json: true,
+			maxsize: 5242880, //5MB
+			maxFiles: 5,
+			colorize: false
+		}
+	},
+
+
+	logger22: {
 		transport: 'Console',
 		options: {
 			level: 'debug',
@@ -270,9 +307,9 @@ module.exports = {
 		locations: {
 			autoindex: false
 		},
-		fill_users_apps: {
-			'model.name': false
-		}
+        fill_users_apps: {
+            'model.name': false
+        }
 	},
 
 	roles: {
@@ -287,20 +324,19 @@ module.exports = {
                 {name: 'User', slug: 'user'},
                 {name: 'Guest', slug: 'guest'}
 			],
-
-			initial: {
-				register: 'user'
+			actions: {
+				admin: {}
 			}
 		},
 		'genv': {
 			'default': [
+				{name: 'Superadmin', slug: 'superadmin'},
 				{name: 'Admin', slug: 'admin'},
 				{name: 'User', slug: 'user'},
 				{name: 'Guest', slug: 'guest'}
-
 			],
-			initial: {
-				register: 'user'
+			initial:{
+				register:'guest'
 			}
 		}
 	},

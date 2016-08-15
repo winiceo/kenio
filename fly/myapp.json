@@ -1,0 +1,35 @@
+{
+  "repo": {
+    "name" : "repo-name",
+    "url"  : "repo-url"
+  },
+  "node": "0.12.7",
+  "redis": "3.2.1",
+  "targets": {
+    "development": {
+
+    },
+    "production": {
+      "host"       : "host",
+      "username"   : "user",
+      "privateKey" : "private key path",
+      "newrelic"   : "newrelic licence key"
+    }
+  },
+  "upstart": {
+    "name": "myapp",
+    "description": "My App Description",
+    "author": "author name",
+    "instances": {
+      "app": {
+        "nodedir": "/root",
+        "exec": "app.js",
+        "worker": "workers.js",
+        "env": {
+          "NODE_APP": "app",
+          "NODE_PORT": 80
+        }
+      }
+    }
+  }
+}

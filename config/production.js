@@ -33,7 +33,7 @@ module.exports = {
 		},
 		session: {
 			name: 'myapp.sid',
-			secret: 'j5O2GA7msFwbiBJTIO3HfjFLxhXovsvf',
+			secret: 'ZrtnLsvgzdiPlpiwTp6QDStNDPTBI96P',
 			cookie: {
 				maxAge: 604800000
 			},
@@ -61,7 +61,7 @@ module.exports = {
 		basic: {
 			enabled: true,
 			user: 'myapp',
-			pass: 'ThAvonVLYQs9EY5Vn1HbYuPpPbXM1mYp'
+			pass: 'LwuB3ojFoM7pWImtMcjYQ7hnro2UzpUf'
 		}
 	},
 
@@ -75,14 +75,14 @@ module.exports = {
 			lean: true
 		},
 		token: {
-			secret: '7ahWfCm2kmGPyJMcTTixYnTvukgINx75',
+			secret: 'AH98xoArpahgOlJDuduIQ3W0OYLp36KD',
 			expires: 60
 		},
 		admin: {
 			user: {
 				name: 'Super Admin',
 				email: 'super@admin.com',
-				password: 'GKQrlLjokYyIu4XDmnhoYmI1nO7JuPVM',
+				password: 'MgbJuVHqtyolNtDVfO1BA3aaIeaHjaaZ',
 				type: 'A'
 			}
 		}
@@ -140,7 +140,7 @@ module.exports = {
 			port: 27017,
 			db: 'myapp',
 			user: 'myapp',
-			pass: 'UHCg24fArBir4VEZHzvRZsg37EkFlEpa',
+			pass: 'mygvUBdoEjVFHPN4aLRECXEPz7YwJWJ1',
 			pool: 10,
 			autoIndex: true,
 			debug: true
@@ -148,7 +148,7 @@ module.exports = {
 		redis: {
 			host: '127.0.0.1',
 			port: 6379,
-			pass: 'm2EXfYRIF1KD3uqPyHOm068YM9NtrZIf'
+			pass: 'mJteXBliTbfN14tXt6PaJ7G4J9HxcXUe'
 		},
 		solr: {
 			enabled: false,
